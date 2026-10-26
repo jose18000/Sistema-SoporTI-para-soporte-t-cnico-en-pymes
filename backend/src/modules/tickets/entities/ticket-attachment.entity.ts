@@ -18,7 +18,7 @@ export class TicketAttachment {
   @Column({ name: 'ticket_id', type: 'uuid' })
   ticketId: string;
 
-  @ManyToOne(() => Ticket, (ticket) => ticket.attachments, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Ticket, (ticket: Ticket) => ticket.attachments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'ticket_id' })
   ticket: Relation<Ticket>;
 

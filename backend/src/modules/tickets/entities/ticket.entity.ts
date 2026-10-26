@@ -85,16 +85,16 @@ export class Ticket {
   @Column({ name: 'sla_status', type: 'varchar', length: 20, default: SlaStatus.ON_TIME })
   slaStatus: SlaStatus;
 
-  @OneToMany(() => TicketComment, (comment) => comment.ticket)
+  @OneToMany(() => TicketComment, (comment: TicketComment) => comment.ticket)
   comments: Relation<TicketComment[]>;
 
-  @OneToMany(() => TicketAttachment, (attachment) => attachment.ticket)
+  @OneToMany(() => TicketAttachment, (attachment: TicketAttachment) => attachment.ticket)
   attachments: Relation<TicketAttachment[]>;
 
-  @OneToMany(() => TicketHistory, (history) => history.ticket)
+  @OneToMany(() => TicketHistory, (history: TicketHistory) => history.ticket)
   history: Relation<TicketHistory[]>;
 
-  @OneToOne(() => SatisfactionSurvey, (survey) => survey.ticket)
+  @OneToOne(() => SatisfactionSurvey, (survey: SatisfactionSurvey) => survey.ticket)
   survey?: Relation<SatisfactionSurvey>;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })

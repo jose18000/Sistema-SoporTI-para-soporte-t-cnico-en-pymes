@@ -18,7 +18,7 @@ export class TicketHistory {
   @Column({ name: 'ticket_id', type: 'uuid' })
   ticketId: string;
 
-  @ManyToOne(() => Ticket, (ticket) => ticket.history, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Ticket, (ticket: Ticket) => ticket.history, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'ticket_id' })
   ticket: Relation<Ticket>;
 
