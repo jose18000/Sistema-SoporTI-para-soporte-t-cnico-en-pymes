@@ -19,6 +19,7 @@ import type { TicketComment } from './ticket-comment.entity';
 import type { TicketAttachment } from './ticket-attachment.entity';
 import type { TicketHistory } from './ticket-history.entity';
 import type { SatisfactionSurvey } from './satisfaction-survey.entity';
+import type { Asset } from '../../inventory/entities/asset.entity';
 
 @Entity('tickets')
 export class Ticket {
@@ -59,6 +60,10 @@ export class Ticket {
 
   @Column({ name: 'asset_id', type: 'uuid', nullable: true })
   assetId?: string;
+
+  @ManyToOne('Asset', (asset: Asset) => asset.tickets, { onDelete: 'SET NULL', nullable: true })
+  @JoinColumn({ name: 'asset_id' })
+  asset?: Relation<Asset>;
 
   @Column({ name: 'parent_incident_id', type: 'uuid', nullable: true })
   parentIncidentId?: string;
