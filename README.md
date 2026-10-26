@@ -35,7 +35,14 @@
   - [x] Script DDL de inicialización con extensión vectorial `pgvector` (`docker/postgres/init.sql`).
   - [x] Orquestación local en `docker-compose.yml` (PostgreSQL, Redis, Mailpit).
   - [x] Documentación de grado: [Arquitectura](docs/ARCHITECTURE.md) y [Diccionario de Datos](docs/DATA_DICTIONARY.md).
-- [ ] **Fase 2: Autenticación, Roles (RBAC) y Base del Backend (NestJS)**
+- [x] **Fase 2: Autenticación, Roles (RBAC) y Base del Backend (NestJS)**
+  - [x] Configuración modular y tipado estricto con NestJS, TypeScript y TypeORM.
+  - [x] Hashing criptográfico con **Argon2id** (estándar OWASP contra ataques de GPU).
+  - [x] Autenticación con **JWT**: Access Token (15 min) y Refresh Token (7 días) para rotación segura.
+  - [x] Control de Acceso Basado en Roles (**RBAC**) con `@Roles('admin', 'technician', 'employee')` y `RolesGuard`.
+  - [x] Registro inmutable de consentimiento para la **Ley 1581 de 2012** (IP, fecha, versión de política).
+  - [x] Servicio global de **Auditoría (`AuditLog`)** para trazabilidad de acciones críticas.
+  - [x] Documentación interactiva Swagger / OpenAPI integrada en `/api/docs`.
 - [ ] **Fase 3: Mesa de Ayuda (Tickets, Estrategias de Asignación, SLA y Notificaciones)**
 - [ ] **Fase 4: Inventario Tecnológico (CMDB), Ciclo de Vida y Códigos QR**
 - [ ] **Fase 5: Asistente Conversacional RAG, Base de Conocimiento y Extracción JSON**
