@@ -6,6 +6,8 @@ import { DatabaseModule } from './database/database.module';
 import { AuditModule } from './modules/audit/audit.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
+import { TicketsModule } from './modules/tickets/tickets.module';
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
 import { RolesGuard } from './common/guards/roles.guard';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
@@ -22,6 +24,8 @@ import { UsersService } from './modules/users/users.service';
     AuditModule,
     UsersModule,
     AuthModule,
+    NotificationsModule,
+    TicketsModule,
   ],
   providers: [
     {
@@ -42,7 +46,6 @@ export class AppModule implements OnApplicationBootstrap {
   constructor(private readonly usersService: UsersService) {}
 
   async onApplicationBootstrap() {
-    // Inicializar departamentos por defecto si la tabla está vacía
     await this.usersService.seedDefaults();
   }
 }
