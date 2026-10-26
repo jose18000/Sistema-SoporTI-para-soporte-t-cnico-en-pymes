@@ -43,7 +43,15 @@
   - [x] Registro inmutable de consentimiento para la **Ley 1581 de 2012** (IP, fecha, versión de política).
   - [x] Servicio global de **Auditoría (`AuditLog`)** para trazabilidad de acciones críticas.
   - [x] Documentación interactiva Swagger / OpenAPI integrada en `/api/docs`.
-- [ ] **Fase 3: Mesa de Ayuda (Tickets, Estrategias de Asignación, SLA y Notificaciones)**
+- [x] **Fase 3: Mesa de Ayuda (Tickets, Estrategias de Asignación, SLA y Notificaciones)**
+  - [x] Generación de códigos correlativos legibles (`SOP-XXXX`) mediante secuencia atómica de PostgreSQL.
+  - [x] Ciclo de vida de estados (`new` → `assigned` → `in_progress` → `on_hold` → `resolved` → `closed`).
+  - [x] Asignación inteligente con **Patrón Strategy** (`SpecialtyAndWorkloadStrategy` y `RoundRobinStrategy`).
+  - [x] Motor de plazos y cumplimiento de **SLA** por criticidad con alertas automáticas.
+  - [x] Detección de incidentes masivos recurrentes en ventana de tiempo.
+  - [x] Historial inmutable de cambios (`ticket_history`) y soporte de comentarios públicos y notas internas.
+  - [x] Encuesta de satisfacción del usuario (1 a 5 estrellas y retroalimentación) al resolver.
+  - [x] Notificaciones duales (In-App y correos transaccionales HTML en Mailpit $0).
 - [ ] **Fase 4: Inventario Tecnológico (CMDB), Ciclo de Vida y Códigos QR**
 - [ ] **Fase 5: Asistente Conversacional RAG, Base de Conocimiento y Extracción JSON**
 - [ ] **Fase 6: Frontend SPA (React + Tailwind) y Dashboard de Métricas**
