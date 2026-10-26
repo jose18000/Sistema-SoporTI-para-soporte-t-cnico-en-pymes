@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  Relation,
 } from 'typeorm';
 import { Ticket } from './ticket.entity';
 import { User } from '../../users/entities/user.entity';
@@ -19,7 +20,7 @@ export class TicketAttachment {
 
   @ManyToOne(() => Ticket, (ticket) => ticket.attachments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'ticket_id' })
-  ticket: Ticket;
+  ticket: Relation<Ticket>;
 
   @Column({ name: 'file_name', type: 'varchar', length: 255 })
   fileName: string;

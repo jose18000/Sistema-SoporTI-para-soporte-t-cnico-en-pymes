@@ -8,6 +8,7 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
+  Relation,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { TicketStatus } from '../enums/ticket-status.enum';
@@ -47,14 +48,14 @@ export class Ticket {
 
   @ManyToOne(() => User, { onDelete: 'RESTRICT' })
   @JoinColumn({ name: 'requester_id' })
-  requester: User;
+  requester: Relation<User>;
 
   @Column({ name: 'assigned_technician_id', type: 'uuid', nullable: true })
   assignedTechnicianId?: string;
 
   @ManyToOne(() => User, { onDelete: 'SET NULL', nullable: true })
   @JoinColumn({ name: 'assigned_technician_id' })
-  assignedTechnician?: User;
+  assignedTechnician?: Relation<User>;
 
   @Column({ name: 'asset_id', type: 'uuid', nullable: true })
   assetId?: string;
@@ -64,7 +65,7 @@ export class Ticket {
 
   @ManyToOne(() => Ticket, { onDelete: 'SET NULL', nullable: true })
   @JoinColumn({ name: 'parent_incident_id' })
-  parentIncident?: Ticket;
+  parentIncident?: Relation<Ticket>;
 
   @Column({ name: 'sla_first_response_deadline', type: 'timestamptz' })
   slaFirstResponseDeadline: Date;
@@ -85,16 +86,16 @@ export class Ticket {
   slaStatus: SlaStatus;
 
   @OneToMany(() => TicketComment, (comment) => comment.ticket)
-  comments: TicketComment[];
+  comments: Relation<TicketComment[]>;
 
   @OneToMany(() => TicketAttachment, (attachment) => attachment.ticket)
-  attachments: TicketAttachment[];
+  attachments: Relation<TicketAttachment[]>;
 
   @OneToMany(() => TicketHistory, (history) => history.ticket)
-  history: TicketHistory[];
+  history: Relation<TicketHistory[]>;
 
   @OneToOne(() => SatisfactionSurvey, (survey) => survey.ticket)
-  survey?: SatisfactionSurvey;
+  survey?: Relation<SatisfactionSurvey>;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
   createdAt: Date;

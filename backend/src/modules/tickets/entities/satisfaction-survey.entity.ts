@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   OneToOne,
   JoinColumn,
+  Relation,
 } from 'typeorm';
 import { Ticket } from './ticket.entity';
 
@@ -18,7 +19,7 @@ export class SatisfactionSurvey {
 
   @OneToOne(() => Ticket, (ticket) => ticket.survey, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'ticket_id' })
-  ticket: Ticket;
+  ticket: Relation<Ticket>;
 
   @Column({ type: 'int' })
   rating: number; // 1 a 5

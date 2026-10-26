@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  Relation,
 } from 'typeorm';
 import { Ticket } from './ticket.entity';
 import { User } from '../../users/entities/user.entity';
@@ -19,7 +20,7 @@ export class TicketComment {
 
   @ManyToOne(() => Ticket, (ticket) => ticket.comments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'ticket_id' })
-  ticket: Ticket;
+  ticket: Relation<Ticket>;
 
   @Column({ name: 'author_id', type: 'uuid' })
   authorId: string;
