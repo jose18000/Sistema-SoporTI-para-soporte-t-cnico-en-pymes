@@ -7,7 +7,7 @@ import {
   JoinColumn,
   Relation,
 } from 'typeorm';
-import { Ticket } from './ticket.entity';
+import type { Ticket } from './ticket.entity';
 
 @Entity('satisfaction_surveys')
 export class SatisfactionSurvey {
@@ -17,7 +17,7 @@ export class SatisfactionSurvey {
   @Column({ name: 'ticket_id', type: 'uuid', unique: true })
   ticketId: string;
 
-  @OneToOne(() => Ticket, (ticket: Ticket) => ticket.survey, { onDelete: 'CASCADE' })
+  @OneToOne('Ticket', (ticket: Ticket) => ticket.survey, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'ticket_id' })
   ticket: Relation<Ticket>;
 

@@ -7,7 +7,7 @@ import {
   JoinColumn,
   Relation,
 } from 'typeorm';
-import { Ticket } from './ticket.entity';
+import type { Ticket } from './ticket.entity';
 import { User } from '../../users/entities/user.entity';
 
 @Entity('ticket_comments')
@@ -18,7 +18,7 @@ export class TicketComment {
   @Column({ name: 'ticket_id', type: 'uuid' })
   ticketId: string;
 
-  @ManyToOne(() => Ticket, (ticket: Ticket) => ticket.comments, { onDelete: 'CASCADE' })
+  @ManyToOne('Ticket', (ticket: Ticket) => ticket.comments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'ticket_id' })
   ticket: Relation<Ticket>;
 

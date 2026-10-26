@@ -15,10 +15,10 @@ import { TicketStatus } from '../enums/ticket-status.enum';
 import { TicketPriority } from '../enums/ticket-priority.enum';
 import { TicketType } from '../enums/ticket-type.enum';
 import { SlaStatus } from '../enums/sla-status.enum';
-import { TicketComment } from './ticket-comment.entity';
-import { TicketAttachment } from './ticket-attachment.entity';
-import { TicketHistory } from './ticket-history.entity';
-import { SatisfactionSurvey } from './satisfaction-survey.entity';
+import type { TicketComment } from './ticket-comment.entity';
+import type { TicketAttachment } from './ticket-attachment.entity';
+import type { TicketHistory } from './ticket-history.entity';
+import type { SatisfactionSurvey } from './satisfaction-survey.entity';
 
 @Entity('tickets')
 export class Ticket {
@@ -85,16 +85,16 @@ export class Ticket {
   @Column({ name: 'sla_status', type: 'varchar', length: 20, default: SlaStatus.ON_TIME })
   slaStatus: SlaStatus;
 
-  @OneToMany(() => TicketComment, (comment: TicketComment) => comment.ticket)
+  @OneToMany('TicketComment', (comment: TicketComment) => comment.ticket)
   comments: Relation<TicketComment[]>;
 
-  @OneToMany(() => TicketAttachment, (attachment: TicketAttachment) => attachment.ticket)
+  @OneToMany('TicketAttachment', (attachment: TicketAttachment) => attachment.ticket)
   attachments: Relation<TicketAttachment[]>;
 
-  @OneToMany(() => TicketHistory, (history: TicketHistory) => history.ticket)
+  @OneToMany('TicketHistory', (history: TicketHistory) => history.ticket)
   history: Relation<TicketHistory[]>;
 
-  @OneToOne(() => SatisfactionSurvey, (survey: SatisfactionSurvey) => survey.ticket)
+  @OneToOne('SatisfactionSurvey', (survey: SatisfactionSurvey) => survey.ticket)
   survey?: Relation<SatisfactionSurvey>;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamptz' })
