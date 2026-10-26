@@ -1,0 +1,62 @@
+services:
+  # Base de Datos Relacional + Vectorial ($0)
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: soporti-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-soporti_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-soporti_secure_pass_2026}
+      POSTGRES_DB: ${DB_NAME:-soporti_db}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-soporti_user} -d ${DB_NAME:-soporti_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - soporti-net
+
+  # Servidor Redis para Cache y Colas BullMQ ($0)
+  redis:
+    image: redis:7-alpine
+    container_name: soporti-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - soporti-net
+
+  # Servidor SMTP local para pruebas de correo ($0)
+  # Interfaz Web: http://localhost:8025
+  # Puerto SMTP: 1025
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: soporti-mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025" # Dashboard Web
+      - "1025:1025" # Servidor SMTP
+    networks:
+      - soporti-net
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  soporti-net:
+    driver: bridge
